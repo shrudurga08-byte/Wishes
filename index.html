@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Diwali 🪔</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="sky"></canvas>
+<div class="stars" id="stars"></div>
+
+<!-- Welcome -->
+<section id="welcome" class="screen active">
+  <div class="diya">🪔</div>
+  <p class="small">A little surprise for you</p>
+  <h1>Happy<br><span>Diwali</span></h1>
+  <p class="sub">Light up your heart ✨</p>
+  <button class="btn" id="start">Come In 🎇</button>
+</section>
+
+<!-- Cards -->
+<section id="cards" class="screen">
+  <div class="dots" id="dots"></div>
+  <div class="card" id="card">
+    <div class="inner">
+      <div class="face front"><div class="icon" id="icon"></div><h2 id="title"></h2><p class="hint">Tap to open 👆</p></div>
+      <div class="face back"><p id="wish"></p></div>
+    </div>
+  </div>
+  <div class="nav"><button class="btn ghost" id="prev">◀</button><button class="btn" id="next">Next ▶</button></div>
+</section>
+
+<!-- Finale -->
+<section id="finale" class="screen">
+  <div id="ask">
+    <div class="icon big">🪔</div>
+    <h2>Last wish... 💛</h2>
+    <p class="sub">Wishes Tamil la venuma, English la venuma?</p>
+    <div class="nav"><button class="btn" data-lang="ta">தமிழ்</button><button class="btn" data-lang="en">English</button></div>
+  </div>
+  <div id="final" class="paper hidden"><p id="para"></p><button class="btn ghost" id="again">Replay 🔁</button></div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
