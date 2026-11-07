@@ -16,11 +16,11 @@ const cardsData=[
  ta:'நல்ல ஆரோக்கியம், மன அமைதி, நன்றியுள்ள இதயம் உங்களுக்கு கிடைக்கட்டும்.'}
 ];
 const finalText={
-en:'Happy Diwali! 🪔 This festival of lights, may all your worries burn away like old shadows and a new light fill your life. May you be blessed with love, laughter, sweet moments, good health and success in everything you do. Keep smiling, keep shining, and spread this light to everyone around you. Wishing you and your family a bright and beautiful Diwali! ✨💛',
-ta:'இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔 இந்த ஒளித் திருநாளில் உங்கள் கவலைகள் அனைத்தும் இருள் போல மறைந்து, புதிய ஒளி உங்கள் வாழ்வில் நிறையட்டும். அன்பு, சிரிப்பு, இனிமை, ஆரோக்கியம், வெற்றி அனைத்தும் உங்களுக்கு கிடைக்கட்டும். எப்போதும் புன்னகையுடன் ஒளிருங்கள், அந்த ஒளியை எல்லோருக்கும் பகிருங்கள். உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி வாழ்த்துகள்! ✨💛'};
+en:'Happy Diwali, {name}! 🪔 This festival of lights, may all your worries burn away like old shadows and a new light fill your life. May you be blessed with love, laughter, sweet moments, good health and success in everything you do. Keep smiling, keep shining, and spread this light to everyone around you. Wishing you and your family a bright and beautiful Diwali! ✨💛',
+ta:'இனிய தீபாவளி நல்வாழ்த்துகள், {name}! 🪔 இந்த ஒளித் திருநாளில் உங்கள் கவலைகள் அனைத்தும் இருள் போல மறைந்து, புதிய ஒளி உங்கள் வாழ்வில் நிறையட்டும். அன்பு, சிரிப்பு, இனிமை, ஆரோக்கியம், வெற்றி அனைத்தும் உங்களுக்கு கிடைக்கட்டும். எப்போதும் புன்னகையுடன் ஒளிருங்கள், அந்த ஒளியை எல்லோருக்கும் பகிருங்கள். உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி வாழ்த்துகள்! ✨💛'};
 
 const $=id=>document.getElementById(id);
-let i=0;
+let i=0,userName='';const SENDER='Shruthi';
 
 // background stars
 for(let k=0;k<70;k++){const s=document.createElement('i');
@@ -57,7 +57,7 @@ function renderCard(){
  const d=cardsData[i];
  $('card').classList.remove('flip');
  $('icon').textContent=d.icon;$('title').textContent=d.title;
- $('wish').innerHTML=d.en+'<br><br><small style="opacity:.9">'+d.ta+'</small>';
+ $('wish').innerHTML='<div class="to">Dear '+userName+' 💛</div>'+d.en+'<br><br><small style="opacity:.9">'+d.ta+'</small><div class="sign">— From '+SENDER+' 🪔</div>';
  $('dots').innerHTML=cardsData.map((_,k)=>`<b class="${k==i?'on':''}"></b>`).join('');
  $('next').textContent=i==cardsData.length-1?'Last Wish 💛':'Next ▶';
  const c=$('card');c.style.animation='none';c.offsetHeight;c.style.animation='';
@@ -65,11 +65,17 @@ function renderCard(){
  setTimeout(()=>skyShot(cv.width*.25,cv.height*.3),250);
  setTimeout(()=>skyShot(cv.width*.75,cv.height*.3),450);
 }
-$('start').onclick=()=>{show('cards');i=0;renderCard();salvo(3)};
+function begin(){
+ const v=$('name').value.trim();
+ if(!v){$('name').classList.add('shake');setTimeout(()=>$('name').classList.remove('shake'),400);$('name').focus();return}
+ userName=v;show('cards');i=0;renderCard();salvo(3)}
+$('start').onclick=begin;
+$('name').addEventListener('keydown',e=>{if(e.key==='Enter')begin()});
 $('card').onclick=()=>$('card').classList.toggle('flip');
 $('next').onclick=()=>{if(i<cardsData.length-1){i++;renderCard()}else{show('finale');$('ask').classList.remove('hidden');$('final').classList.add('hidden');salvo(4)}};
 $('prev').onclick=()=>{if(i>0){i--;renderCard()}};
 document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{
- $('para').textContent=finalText[b.dataset.lang];
+ $('para').textContent=finalText[b.dataset.lang].replace('{name}',userName);
+ $('from').textContent=(b.dataset.lang==='ta'?'அன்புடன், ':'With love, ')+SENDER+' 💛';
  $('ask').classList.add('hidden');$('final').classList.remove('hidden');salvo(8)});
-$('again').onclick=()=>{show('welcome')};
+$('again').onclick=()=>{$('name').value='';show('welcome')};

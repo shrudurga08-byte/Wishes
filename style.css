@@ -40,3 +40,15 @@ background:linear-gradient(160deg,#6a1b9a,#311b92)}
 .paper p{font-size:19px;line-height:1.9;margin-bottom:24px}
 .hidden{display:none}
 h2{font-size:30px;margin:10px 0}
+
+.ask{font-size:17px;margin-bottom:12px;color:#ffe082}
+#name{width:min(280px,80vw);padding:14px 20px;margin-bottom:18px;font-size:18px;text-align:center;border-radius:50px;border:2px solid #ffd54f99;
+background:#ffffff14;color:#fff3d6;outline:none;transition:.2s}
+#name::placeholder{color:#ffe0827a}
+#name:focus{border-color:#ffd54f;box-shadow:0 0 22px #ffb30088}
+#name.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.to{color:#ffe082;font-size:18px;margin-bottom:10px}
+
+.from{font-size:22px !important;font-weight:700;color:#ffd54f;margin:-6px 0 24px !important;text-shadow:0 0 14px #ff9800}
+.sign{margin-top:18px;font-size:16px;color:#ffe082;font-weight:700}
